@@ -1,0 +1,89 @@
+﻿<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+
+
+    <link rel="stylesheet" href="/resources/lib/bootstrap-4.2.1-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/resources/lib/caroussel/carousel.css" />
+    <link rel="stylesheet" href="~/css/v4-shims.css" />
+    <link rel="stylesheet" href="~/css/v4-shims.min.css" />
+    <link rel="stylesheet" href="~/css/bootstrap.css" />
+    <link rel="stylesheet" href="/resources/lib/bootstrap-ecommerce-uikit/css/ui.css" />
+    <link rel="stylesheet" href="/resources/lib/bootstrap-ecommerce-uikit/css/responsive.css" media="only screen and (max-width: 1200px)" />
+    <link rel="stylesheet" href="~/resources/lib/bootstrap-ecommerce-uikit/ui-ecommerce/plugins/fancybox/fancybox.min.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="~/css/StyleSheet.css" />
+    <link rel="stylesheet" href="~/css/animate.css" />
+</head>
+<body>
+    <div class="load"> <img src="~/resources/carregar.gif"></div>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
+            <a class="navbar-brand" asp-action="Index" asp-controller="Home" asp-area=""> ControleFrotas</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/"><i class="fas fa-home"></i> Home <span class="sr-only">(current)</span></a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Home/Contato"><i class="far fa-address-book"></i> Fale Conosco </a>
+                    </li>
+
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+
+
+
+                    <input class="form-control mr-sm-2" type="search" placeholder="palavra" aria-label="Procurar">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Pesquisa</button>
+                    <a class="nav-link" href="/Cliente/Home/Login"><i class="fas fa-user-alt"></i> Login Cliente</a>
+                    <a class="nav-link" href="/Colaborador/Home/Login"><i class="fas fa-user-alt"></i> Login Colaborador</a>
+                </form>
+            </div>
+        </nav>
+    </header>
+    <div>
+        @RenderBody()
+    </div>
+    <hr class="featurette-divider">
+
+    <!-- FOOTER -->
+    <footer class="container">
+        <p class="float-right"><a href="#">Voltar para o topo</a></p>
+        <p>&copy;Controle Frotas - @DateTime.Now.ToString("dd/MM/yyyy"), Inc. &middot; <a href="#">Privacidade</a> &middot; <a href="#">Termos</a></p>
+    </footer>
+    <!-- Bootstrap core JavaScript
+              ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+
+    <script src="~/resources/lib/jquery3.3.1/jquery-3.3.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="/resources/lib/jquery3.3.1/jquery-3.3.1.min.js"><\/script>')</script>
+    <script src="~/resources/lib/mask/jquery.mask.min.js"></script>
+    <script src="~/resources/lib/bootstrap-4.2.1-dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/resources/lib/feather/feather.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/resources/lib/holder/holder.min.js"></script>
+    <script src="~/resources/lib/popper1.14.6/popper.min.js"></script>
+    <script src="~/js/ActionsVisitante.js"></script>
+    <script src="~/js/wow.min.js"></script>
+    <script type="text/javascript">
+        new WOW().init();
+    </script>
+    <script>
+        //código usando jQuery
+        $(document).ready(function () {
+            $('.load').hide();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+﻿@model X.PagedList.IPagedList<ControleFrotasDLL.BLL.Aluguel>
+@{
+    ViewData["Title"] = "Alugueis";
+}
+@using X.PagedList;
+@using X.PagedList.Mvc.Core;
+
+<br />
+<br />
+<h2>Aluguéis Pendentes</h2>
+<a asp-action="Cadastrar" class="btn btn-primary">Cadastrar</a>
+
+
+@if (TempData["MSG_S"] != null)
+{
+    <p class="alert alert-success">@TempData["MSG_S"]</p>
+}
+
+@if (Model.Count > 0)
+{
+
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">@Html.DisplayNameFor(model => model.First().Id)</th>
+                    <th scope="col">@Html.DisplayNameFor(model => model.First().DataInicio)</th>
+                    <th scope="col">@Html.DisplayNameFor(model => model.First().DataPrevista)</th>
+                    <th scope="col">@Html.DisplayNameFor(model => model.First().Seguro)</th>
+                    <th scope="col">@Html.DisplayNameFor(model => model.First().AluguelClienteId)</th>
+                    <th scope="col">@Html.DisplayNameFor(model => model.First().AluguelVeiculoId)</th>
+                    <th scope="col">@Html.DisplayNameFor(model => model.First().ValorPrevisto)</th>
+                    <th scope="col">@Html.DisplayNameFor(model => model.First().Status)</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (ControleFrotasDLL.BLL.Aluguel aluguel in Model)
+                {
+
+                    <tr>
+                        <th scope="row">@aluguel.Id</th>
+                        @{
+
+
+                            DateTime.TryParseExact(aluguel.DataInicio, "yyyy/MM/dd", System.Globalization.CultureInfo.InvariantCulture,
+                                                                System.Globalization.DateTimeStyles.None, out var dataInicio);
+
+                            DateTime.TryParseExact(aluguel.DataPrevista, "yyyy/MM/dd", System.Globalization.CultureInfo.InvariantCulture,
+                                                                System.Globalization.DateTimeStyles.None, out var dataPrevista);
+
+
+                        }
+                        <th scope="row">@dataInicio.ToString("dd/MM/yyyy")</th>
+                        <th scope="row">@dataPrevista.ToString("dd/MM/yyyy")</th>
+                        <td>@Html.DisplayFor(model => aluguel.Seguro.Nome)</td>
+                        <td>@Html.DisplayFor(model => aluguel.ClienteJuridico.Cliente.Nome)</td>
+                        <td>@Html.DisplayFor(model => aluguel.VeiculoEmpresa.Veiculo.Placa)</td>
+                        <th scope="row">@aluguel.ValorPrevisto</th>
+                        @{
+                            if (aluguel.Status == 0)
+                            {
+                                <td>Pendente</td>
+                            }
+                            else
+                            {
+                                <td>Paga</td>
+                            }
+                        }
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+
+    @Html.PagedListPager((IPagedList)Model, pagina => Url.Action("Index", new { pagina }))
+}
+else
+{
+    <span>Nenhum Registro Cadastrado!</span>
+}

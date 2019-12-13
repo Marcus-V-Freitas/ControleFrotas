@@ -1,0 +1,95 @@
+﻿@{
+
+     ControleFrotasDLL.BLL.Contato contato = (ControleFrotasDLL.BLL.Contato)ViewData["CONTATO"];
+}
+@model ControleFrotasDLL.BLL.Contato
+
+<main role="main">
+    <br />
+    <br />
+    <div class="container">
+        <div class="row">
+            <aside class="col-md-6">
+                <h4 class="subtitle-doc">
+                    Outras formas de Contato:
+                </h4>
+                <div id="code_desc_simple">
+                    <div class="box">
+                        <dl>
+                            <dt>Devolução/Garantia: </dt>
+                            <dd>Devolucao@controlefrotas.com.br</dd>
+                        </dl>
+                        <dl>
+                            <dt>Telefone:</dt>
+                            <dd>(11) 4638-4747</dd>
+                        </dl>
+                        <dl>
+                            <dt>SAC:</dt>
+                            <dd>sac@controlefrotas.com.br</dd>
+                        </dl>
+                    </div> <!-- box.// -->
+                </div> <!-- code-wrap.// -->
+            </aside>
+            <aside class="col-sm-6">
+
+                <h4 class="subtitle-doc">
+                    Fale Conosco:
+                </h4>
+                <div id="contato">
+
+                    <article class="card">
+                        <div class="card-body p-5">
+                            @if (ViewData["MSG_S"] != null)
+                            {
+                            <p class="alert alert-success">@Html.Raw(ViewData["MSG_S"])</p>
+                            }
+                            @if (ViewData["MSG_E"] != null)
+                            {
+                            <p class="alert alert-danger">@Html.Raw(ViewData["MSG_E"])</p>
+                            }
+                            <form method="post">
+                                <div class="form-group">
+                                    <label asp-for="Nome"></label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fa fa-user"></i></span>
+                                        </div>
+                                        <input asp-for="Nome" class="form-control" placeholder="" value="@(contato!=null ? contato.Nome:" ")">
+                                        <span asp-validation-for="Nome" class="text-danger"></span>
+                                    </div> <!-- input-group.// -->
+                                </div> <!-- form-group.// -->
+
+                                <div class="form-group">
+                                    <label asp-for="Email"></label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fa fa-at"></i></span>
+                                        </div>
+                                        <input asp-for="Email" class="form-control" placeholder="" value="@(contato != null ? contato.Email : " ")">
+                                        <span asp-validation-for="Email" class="text-danger"></span>
+
+                                    </div> <!-- input-group.// -->
+                                </div> <!-- form-group.// -->
+
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label asp-for="Texto"><span class="hidden-xs"></span> </label>
+                                            <div class="form-inline">
+                                                <textarea asp-for="Texto" class="form-control" style="width:100%">@(contato!=null ? contato.Texto:"")</textarea>
+                                                <span asp-validation-for="Texto" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> <!-- row.// -->
+                                <button class="subscribe btn btn-primary btn-block" type="submit"> Enviar </button>
+                            </form>
+                        </div> <!-- card-body.// -->
+                    </article> <!-- card.// -->
+
+                </div> <!-- code-wrap.// -->
+
+            </aside>
+        </div>
+    </div>
+</main>

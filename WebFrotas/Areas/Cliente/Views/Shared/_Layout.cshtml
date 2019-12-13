@@ -1,0 +1,146 @@
+﻿@inject ControleFrotasDLL.BLL.Libraries.Login.LoginCliente Cliente
+<!DOCTYPE html>
+
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v3.8.5">
+    <title>@ViewData["Title"]</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="~/resources/lib/bootstrap-4.2.1-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/resources/lib/pagedlist/PageList.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="/resources/lib/bootstrap-ecommerce-uikit/css/ui.css" />
+    <link rel="stylesheet" href="/resources/lib/bootstrap-ecommerce-uikit/css/responsive.css" media="only screen and (max-width: 1200px)" />
+    <link rel="stylesheet" href="~/resources/lib/bootstrap-ecommerce-uikit/ui-ecommerce/plugins/fancybox/fancybox.min.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="~/css/StyleSheet.css" />
+    <link rel="stylesheet" href="~/css/v4-shims.css" type="text/css"/>
+
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        @@media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+    <!-- Custom styles for this template -->
+
+</head>
+<body>
+    <div class="load"> <img src="~/resources/carregar.gif"></div>
+    <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" asp-action="Index" asp-controller="Home" asp-area="">ControleFrotas</a>
+        <ul class="navbar-nav px-1">
+            <li class="nav-item text-nowrap">
+                <a class="fa fa-check-square col-sm-3 col-md-2 mr-0" style="text-align:start;color:white">    STATUS: Online - @Cliente.GetCliente().Nome</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav px-3">
+            <li class="nav-item text-nowrap">
+                <a class="nav-link" asp-action="Logout" asp-controller="Home" asp-area="Cliente">Sair</a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+                <div class="sidebar-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" asp-action="" asp-controller="">
+                                <span class="fa fa-bar-chart"></span>
+
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" asp-action="Painel" asp-controller="Home">
+                                <span class="fa fa-bar-chart"></span>
+                                Painel de Controle
+                            </a>
+                        </li>
+                        @if (Cliente.GetCliente().Tipo == ControleFrotasDLL.BLL.Libraries.Constants.ClienteTipoConstant.Juridico)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-action="Index" asp-controller="Aluguel">
+                                    <span class="fa fa-shopping-cart"></span>
+                                    Aluguéis
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-action="Index" asp-controller="FaturaAluguel">
+                                    <span class="fa fa-money"></span>
+                                    Faturas
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-action="Index" asp-controller="Motorista">
+                                    <span class="fa fa-id-card-o"></span>
+                                    Motoristas
+                                </a>
+                            </li>
+                        }
+                        <li class="nav-item">
+                            <a class="nav-link" asp-action="Index" asp-controller="Despesa">
+                                <span class="fa fa-shopping-bag"></span>
+                                Despesas
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-action="Index" asp-controller="RegistroDespesa">
+                                <span class="fa fa-tags"></span>
+                                Registros De Despesas
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-action="Index" asp-controller="RegistroUso">
+                                <span class="fa fa-tags"></span>
+                                Registros De Requisição
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-action="Index" asp-controller="VeiculoCliente">
+                                <span class="fa fa-car"></span>
+                                Frota Do Cliente
+                            </a>
+                        </li>
+                    </ul>
+
+                </div>
+            </nav>
+
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+                @RenderBody()
+            </main>
+        </div>
+    </div>
+
+    <script src="~/resources/lib/jquery3.3.1/jquery-3.3.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="/resources/lib/jquery3.3.1/jquery-3.3.1.min.js"><\/script>')</script>
+    <script src="~/js/Actions.js"></script>
+    <script src="~/resources/lib/mask/jquery.mask.min.js"></script>
+    <script src="~/resources/lib/bootstrap-4.2.1-dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/resources/lib/feather/feather.js"></script>
+    <script src="~/resources/lib/popper1.14.6/popper.min.js"></script>
+    <script src="~/resources/lib/charts/charts.js"></script>
+    <script src="/resources/lib/holder/holder.min.js"></script>
+    <script src="~/resources/lib/bootstrap-ecommerce-uikit/ui-ecommerce/plugins/fancybox/fancybox.min.js"></script>
+    <script src="~/js/ActionsVisitante.js"></script>
+
+</body>
+</html>

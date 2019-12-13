@@ -1,0 +1,74 @@
+﻿@model X.PagedList.IPagedList<ControleFrotasDLL.BLL.Fornecedor>
+@{
+    ViewData["Title"] = "Fornecedores";
+    var pesquisa = Context.Request.Query["pesquisa"];
+}
+@using X.PagedList;
+@using X.PagedList.Mvc.Core;
+
+
+<br />
+<br />
+<h2>Fornecedores de Seguro</h2>
+
+<form method="get">
+    <div class="form-group">
+        <label for="pesquisa">Pesquisar:</label>
+        <input type="text" name="pesquisa" id="pesquisa" value="@pesquisa" class="form-control" placeholder="Digite o nome do fornecedor">
+    </div>
+    <button type="submit" class="btn btn-primary">OK</button>
+</form>
+
+<br />
+<br />
+
+
+<a asp-action="Cadastrar" class="btn btn-primary">Cadastrar</a>
+
+@if (TempData["MSG_S"] != null)
+{
+    <p class="alert alert-success">@TempData["MSG_S"]</p>
+}
+
+@if (Model.Count > 0)
+{
+
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">@Html.DisplayNameFor(model => model.First().Id)</th>
+                    <th scope="col">@Html.DisplayNameFor(model => model.First().Nome)</th>
+                    <th scope="col">@Html.DisplayNameFor(model => model.First().Email)</th>
+                    <th scope="col">@Html.DisplayNameFor(model => model.First().Telefone)</th>
+                    <th scope="col">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (ControleFrotasDLL.BLL.Fornecedor fornecedor in Model)
+                {
+
+                    <tr>
+                        <th scope="row">@fornecedor.Id</th>
+                        <td>@fornecedor.Nome</td>
+                        <td>@fornecedor.Email</td>
+                        <td>@fornecedor.Telefone</td>
+
+                        <td>
+                            <a href="/Colaborador/Fornecedor/Seguro/?pagina=1&rota=@fornecedor.Id" class="btn btn-dark">Seguros Oferecidos</a>
+                            <a asp-action="Atualizar" asp-route-id="@fornecedor.Id" class="btn btn-secondary">Atualizar</a>
+                            <a asp-action="Excluir" asp-route-id="@fornecedor.Id" class="btn btn-danger">Excluir</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+
+    @Html.PagedListPager((IPagedList)Model, pagina => Url.Action("Index", new { pagina = pagina, pesquisa = pesquisa }))
+}
+else
+{
+    <span>Nenhum Registro Cadastrado!</span>
+}

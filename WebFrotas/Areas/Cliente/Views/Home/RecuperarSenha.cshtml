@@ -1,0 +1,44 @@
+﻿@model ControleFrotasDLL.BLL.Cliente
+
+@{
+    ViewData["Title"] = "RecuperarSenha";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main role="main">
+    <br />
+    <br />
+    <section class="container">
+        <aside class="col-sm-4">
+            <h3 class="subtitle-doc">
+                Recuperar Senha
+            </h3>
+            <div id="code_login_1">
+                <div class="card">
+                    <article class="card-body">
+                       @if (TempData["MSG_S"] != null)
+                        {
+                            <p class="alert alert-success">@Html.Raw(TempData["MSG_S"])</p>
+                        }
+                        @if (TempData["MSG_E"] != null)
+                        {
+                            <p class="alert alert-danger">@Html.Raw(TempData["MSG_E"])</p>
+                        }
+                        <form method="post">
+                            <div class="form-group">
+                                <label>E-mail</label>
+                                <input asp-for="Email" class="form-control" placeholder="Email">
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div> <!-- form-group// -->
+
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary btn-block"> Enviar </button>
+                                <button asp-action="Login" asp-controller="Home" asp-area="Cliente" formmethod="get" class="btn btn-primary btn-block">Voltar</button>
+                            </div> <!-- form-group// -->
+                        </form>
+                    </article>
+                </div> <!-- card.// -->
+            </div> <!-- code-wrap.// -->
+        </aside>
+    </section>
+</main>

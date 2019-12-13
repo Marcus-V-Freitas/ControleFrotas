@@ -1,0 +1,90 @@
+﻿@model X.PagedList.IPagedList<ControleFrotasDLL.BLL.VeiculoEmpresa>
+@{
+    ViewData["Title"] = "VeiculosEmpresa";
+    var pesquisa = Context.Request.Query["pesquisa"];
+}
+@using X.PagedList;
+@using X.PagedList.Mvc.Core;
+
+<br />
+<br />
+<h2>Veículos da Empresa</h2>
+
+<form method="get">
+    <div class="form-group">
+        <label for="pesquisa">Pesquisar:</label>
+        <input type="text" name="pesquisa" id="pesquisa" value="@pesquisa" class="form-control" placeholder="Digite a categoria do veículo">
+    </div>
+
+    <button type="submit" class="btn btn-primary">OK</button>
+</form>
+
+<br />
+<br />
+<div>
+    <a asp-action="Cadastrar" class="btn btn-primary">Cadastrar</a>
+    <a asp-action="IndexRodizio" class="btn btn-primary">VeiculosRodizio</a>
+</div>
+@if (TempData["MSG_S"] != null)
+{
+    <p class="alert alert-success">@TempData["MSG_S"]</p>
+}
+
+@if (Model.Count > 0)
+{
+
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">@Html.DisplayNameFor(model => model.First().VeiculoEmpresaId)</th>
+                    <th scope="col">@Html.DisplayNameFor(model => model.First().Veiculo.Placa)</th>
+                    <th scope="col">@Html.DisplayNameFor(model => model.First().Veiculo.Renavam)</th>
+                    <th scope="col">@Html.DisplayNameFor(model => model.First().Veiculo.Link_Foto)</th>
+                    <th scope="col">@Html.DisplayNameFor(model => model.First().Veiculo.ModeloId)</th>
+                    <th scope="col">@Html.DisplayNameFor(model => model.First().Veiculo.CategoriaVeiculoId)</th>
+                    <th scope="col">@Html.DisplayNameFor(model => model.First().Veiculo.Situacao)</th>
+                    <th scope="col">@Html.DisplayNameFor(model => model.First().Preco_Dia)</th>
+                    <th scope="col">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (ControleFrotasDLL.BLL.VeiculoEmpresa veiculo in Model)
+                {
+
+                <tr>
+                    <th scope="row">@veiculo.Veiculo.Id</th>
+
+                    <th scope="row">@veiculo.Veiculo.Placa</th>
+                    <th scope="row">@veiculo.Veiculo.Renavam</th>
+                    <th> <img src="@veiculo.Veiculo.Link_Foto" width="180" height="150" /> </th>
+                    <td>@Html.DisplayFor(model => veiculo.Veiculo.Modelo.Nome)</td>
+                    <td>@Html.DisplayFor(model => veiculo.Veiculo.CategoriaVeiculo.Nome)</td>
+                    @if (veiculo.Veiculo.Situacao.Equals("A"))
+                    {
+                        <th scope="row">Disponível</th>
+                    }
+                    else
+                    {
+                        <th scope="row">Reservado</th>
+                    }
+                    <th scope="row">@veiculo.Preco_Dia</th>
+
+                    <td>
+                        <a asp-action="Atualizar" asp-route-id="@veiculo.VeiculoEmpresaId" class="btn btn-secondary">Atualizar</a>
+                        <a asp-action="Excluir" asp-route-id="@veiculo.VeiculoEmpresaId" class="btn btn-danger">Excluir</a>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+
+    @Html.PagedListPager((IPagedList)Model, pagina => Url.Action("Index", new { pagina = pagina, pesquisa = pesquisa }))
+}
+else
+{
+    <span>Nenhum Registro Cadastrado!</span>
+}
+

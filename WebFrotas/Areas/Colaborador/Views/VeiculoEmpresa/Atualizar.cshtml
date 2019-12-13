@@ -1,0 +1,47 @@
+﻿@model ControleFrotasDLL.BLL.VeiculoEmpresa
+@{
+    ViewData["Title"] = "Atualizar";
+}
+<br />
+<br />
+<form id="frm" method="post">
+    <input type="hidden" asp-for="VeiculoEmpresaId" />
+    <input type="hidden" asp-for="Veiculo.Id" />
+
+    <div class="form-group">
+        <label asp-for="Veiculo.Placa"></label>
+        <input asp-for="Veiculo.Placa" class="form-control placa" placeholder="Digite a placa">
+        <span asp-validation-for="Veiculo.Placa" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Veiculo.Renavam"></label>
+        <input asp-for="Veiculo.Renavam" class="form-control renavam" placeholder="Digite o renavam">
+        <span asp-validation-for="Veiculo.Renavam" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Veiculo.Link_Foto"></label>
+        <input asp-for="Veiculo.Link_Foto" class="form-control" placeholder="Digite o link da foto">
+        <span asp-validation-for="Veiculo.Link_Foto" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Veiculo.ModeloId"></label>
+        <select asp-for="Veiculo.ModeloId" class="form-control" asp-items="@ViewBag.Modelos">
+            <option value="">Selecione</option>
+        </select>
+        <span asp-validation-for="Veiculo.ModeloId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Veiculo.CategoriaVeiculoId"></label>
+        <select asp-for="Veiculo.CategoriaVeiculoId" class="form-control" asp-items="@ViewBag.Categorias">
+            <option value="">Selecione</option>
+        </select>
+        <span asp-validation-for="Veiculo.CategoriaVeiculoId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Preco_Dia"></label>
+        <input asp-for="Preco_Dia" class="form-control dinheiro" placeholder="Digite o preço do aluguel (p/Dia)">
+        <span asp-validation-for="Preco_Dia" class="text-danger"></span>
+    </div>
+    <button type="submit" id="send" class="btn btn-primary">Salvar</button> <a asp-action="Index" class="btn btn-info">Voltar</a>
+</form>

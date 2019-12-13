@@ -1,0 +1,39 @@
+﻿@model ControleFrotasDLL.BLL.RegistroUso
+@{
+    ViewData["Title"] = "Requisitar";
+}
+<br />
+<br />
+<form method="post">
+
+    <div class="form-group">
+        <div class="form-group">
+            <label asp-for="RegistroVeiculoClienteId"></label>
+            <input asp-for="RegistroVeiculoClienteId" readonly="readonly" value="@ViewBag.Veiculo.VeiculoClienteId" class="form-control" placeholder="@ViewBag.Veiculo.Veiculo.Placa">
+            <span asp-validation-for="RegistroVeiculoClienteId" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="Inicio"></label>
+        <input asp-for="Inicio" type="date" class="form-control">
+        <span asp-validation-for="Inicio" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Prevista"></label>
+        <input asp-for="Prevista" type="date" class="form-control">
+        <span asp-validation-for="Prevista" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Rota"></label>
+        <input asp-for="Rota" class="form-control">
+        <span asp-validation-for="Rota" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="RegistroUsoMotoristaId"></label>
+        <select asp-for="RegistroUsoMotoristaId" class="form-control" asp-items="@ViewBag.Motoristas">
+            <option value="">Selecione</option>
+        </select>
+        <span asp-validation-for="RegistroUsoMotoristaId" class="text-danger"></span>
+    </div>
+    <button type="submit" id="send" class="btn btn-primary">Salvar</button> <a asp-action="Index" class="btn btn-info">Voltar</a>
+</form>

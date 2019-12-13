@@ -1,0 +1,118 @@
+﻿@model ControleFrotasDLL.BLL.Libraries.ViewModel.PagamentoViewModel
+@{
+    ViewData["Title"] = "Pagamento";
+
+}
+<br />
+<br />
+<div class="container">
+    <br />
+    <br />
+    <div class="row">
+        <div class="col-md-6">
+            <div id="code_itemside_img2">
+                <div class="box items-bordered-wrap">
+
+
+                </div>
+                <div class="box">
+                    <h4 class="subtitle-doc">
+                        Resumo
+                    </h4>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+
+            <div id="code_payment2">
+
+                <article class="card">
+                    <div class="card-body p-5">
+
+                        <ul class="nav bg radius nav-pills nav-fill mb-3" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active show" data-toggle="pill" href="#nav-tab-card">
+                                    <i class="fa fa-credit-card"></i> Cartão de Crédito
+                                </a>
+                            </li>
+
+                        </ul>
+
+                        <div class="tab-content">
+                            <div class="tab-pane fade active show" id="nav-tab-card">
+                                <form id="frm" method="post">
+
+
+                                    <input type="hidden" asp-for="Aluguel.Id" />
+                                    <input type="hidden" asp-for="Aluguel.DataInicio" />
+                                    <input type="hidden" asp-for="Aluguel.AluguelMotoristaId" />
+                                    <input type="hidden" asp-for="Aluguel.DataPrevista" />
+                                    <input type="hidden" asp-for="Aluguel.AluguelClienteId" />
+                                    <input type="hidden" asp-for="Aluguel.AluguelVeiculoId" />
+                                    <input type="hidden" asp-for="Aluguel.AluguelSeguroId" />
+                                    <input type="hidden" asp-for="Aluguel.ValorPrevisto" />
+                                    <input type="hidden" asp-for="Aluguel.Status" />
+                                    <div class="form-group">
+                                        <label asp-for="CartaoCredito.NomeNoCartao"></label>
+                                        <input type="text" asp-for="CartaoCredito.NomeNoCartao" class="form-control" placeholder="">
+                                        <span asp-validation-for="CartaoCredito.NomeNoCartao"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="CartaoCredito.NumeroCartao"></label>
+
+                                        <div class="input-group">
+                                            <input type="text" asp-for="CartaoCredito.NumeroCartao" class="form-control" placeholder="">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text text-muted">
+                                                    <i class="fab fa-cc-visa"></i> &nbsp; <i class="fab fa-cc-amex"></i> &nbsp;
+                                                    <i class="fab fa-cc-mastercard"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <span asp-validation-for="CartaoCredito.NumeroCartao"></span>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-8">
+                                            <div class="form-group">
+                                                <label for="VecimentoMM" class="hidden-xs">Vecimento</label>
+                                                <div class="input-group">
+                                                    <input type="number" class="form-control" placeholder="MM" asp-for="CartaoCredito.VecimentoMM">
+                                                    <input type="number" class="form-control" placeholder="YYYY" asp-for="CartaoCredito.VecimentoYY">
+                                                </div>
+                                                <span asp-validation-for="CartaoCredito.VecimentoMM"></span>
+                                                <span asp-validation-for="CartaoCredito.VecimentoYY"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label asp-for="CartaoCredito.CodigoSeguranca" data-toggle="tooltip" title="" data-original-title="3 digits code on back side of the card">Cód. segurança <i class="fa fa-question-circle"></i></label>
+                                                <input type="number" class="form-control" asp-for="CartaoCredito.CodigoSeguranca">
+                                                <span asp-validation-for="CartaoCredito.CodigoSeguranca"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label asp-for="Parcelamento" data-toggle="tooltip" title="">Parcelamento <i class="fa fa-question-circle"></i></label>
+                                                <select class="form-control" asp-for="Parcelamento.Numero" asp-items="ViewBag.Parcelamentos"></select>
+                                                <span asp-validation-for="Parcelamento"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+
+                                        </div>
+                                    </div>
+                                    <button class="subscribe btn btn-primary btn-block" type="submit" id="send"> Confirmar  </button>
+                                </form>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                </article>
+
+            </div>
+        </div>
+    </div>
+</div>

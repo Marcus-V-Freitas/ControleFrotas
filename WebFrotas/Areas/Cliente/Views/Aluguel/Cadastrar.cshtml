@@ -1,0 +1,208 @@
+﻿@model ControleFrotasDLL.BLL.Aluguel
+@{
+    ViewData["Title"] = "Cadastrar";
+}
+
+<br />
+<br />
+<form id="frm" method="post">
+
+    <label>Cliente:</label>
+    <div class="form-group">
+        <select asp-for="AluguelClienteId" class="form-control">
+            @{
+                foreach (var item in (List<ControleFrotasDLL.BLL.ClienteJuridico>)ViewBag.Cliente)
+                {
+                    <option value="@item.ClienteJuridicoId">@item.Cliente.Nome</option>
+                }
+            }
+        </select>
+    </div>
+    <label>Motorista:</label>
+    <div class="form-group">
+        <select asp-for="AluguelMotoristaId" class="form-control">
+            @{
+                foreach (var item in (List<ControleFrotasDLL.BLL.Motorista>)ViewBag.Motorista)
+                {
+                    <option value="@item.ClienteMotoristaId">@item.Cliente.Nome</option>
+                }
+            }
+        </select>
+    </div>
+
+
+    <div class="form-group">
+        <label>Data Prevista de Retorno:</label>
+        <input type="text" class="form-control data"  id="DatePrevista" asp-for="DataPrevista" />
+        <span asp-validation-for="DataPrevista" class="text-danger"></span>
+    </div>
+
+    <input type="hidden" value="@DateTime.Now.Date.ToString("dd/MM/yyyy")" id="DateInicio" />
+
+    <input type="hidden" value=@DateTime.Now.Date.ToString("yyyy/MM/dd") asp-for="DataInicio" />
+    <label>Veículos Disponíveis:</label>
+    <div class="form-group">
+        <div class="col-lg-9">
+            <select id="sltProduto" class="form-control">
+                @{
+                    foreach (var item in (IEnumerable<ControleFrotasDLL.BLL.VeiculoEmpresa>)ViewBag.Veiculo)
+                    {
+                        <option value="@item.VeiculoEmpresaId">@item.Veiculo.Placa | @item.Preco_Dia</option>
+                    }
+                }
+            </select>
+
+        </div>
+    </div>
+    <label>Seguros Disponíveis:</label>
+    <div class="form-group">
+        <div class="col-lg-9">
+            <select id="seguro" class="form-control">
+                @{
+                    foreach (var item in (IEnumerable<ControleFrotasDLL.BLL.Seguro>)ViewBag.Seguro)
+                    {
+                        <option value="@item.Id">@item.Custo | @item.Fornecedor.Nome | @item.Nome</option>
+                    }
+                }
+            </select>
+
+        </div>
+    </div>
+    <br />
+
+    <button type="button" class="btn btn-block btn-primary" onclick="AdicionarVeiculo()">Selecionar</button>
+
+
+
+
+
+
+    <br />
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <td>Código</td>
+                <td>Preço do dia</td>
+            </tr>
+        </thead>
+        <tbody id="listaProdutos"></tbody>
+    </table>
+
+
+    <div style="float:left;font-size:22px;"> Total: R$</div>
+    <div style="float:left;font-size:22px; margin-left:5px;" id="divTotal"> 0.00 </div>
+
+    <textarea asp-for="ListaProdutos" id="ListaProdutosJSON" style="display:none;"></textarea>
+    @{
+        try
+        {
+            var erro = TempData["ErrorEstoque"].ToString();
+            <h5 class="text-danger">@erro</h5>
+        }
+        catch
+        {
+
+        }
+    }
+
+    <input type="hidden" id="txtTotal" asp-for="ValorPrevisto" />
+
+
+    <br /><br />
+
+    <button type="submit" id="send" class="btn btn-block btn-success">Registrar Aluguel</button>
+    <a asp-action="Index" class="btn btn-block btn-primary">Voltar</a>
+</form>
+<br />
+
+<script>
+    var itens = new Object();
+    itens.Produtos = new Array();
+
+    var Veiculo_Id = document.getElementById("sltProduto");
+    var Seguro_Id = document.getElementById("seguro");
+    var TotalVenda = document.getElementById("divTotal");
+    var txtTotal = document.getElementById("txtTotal");
+    var ListaProdutosJSON = document.getElementById("ListaProdutosJSON");
+    var ListaProdutos = document.getElementById("listaProdutos");
+    var end = document.getElementById("DatePrevista");
+    var inicio = document.getElementById("DateInicio");
+
+
+    function Voltar() {
+        window.location.href = '../Aluguel/Index';
+    }
+
+    function AdicionarVeiculo() {
+
+        var DescricaoPreco = Veiculo_Id.options[Veiculo_Id.selectedIndex].text;
+        var DescricaoSeguro = Seguro_Id.options[Seguro_Id.selectedIndex].text;
+
+        var arrayDescricaoSeguro = DescricaoSeguro.split('|');
+
+        //var seguro = document.getElementById("Seguro");
+        var arrayDescricaoPreco = DescricaoPreco.split('|');
+        var total = (arrayDescricaoPreco[1].replace(",", ".") * arrayDescricaoSeguro[0].replace(",", "."));
+        var parcial = (arrayDescricaoPreco[1].replace(",", ".") * 1);
+
+        var dataSplit = end.value.split('/');
+
+        var day = dataSplit[0]; // Armazenar dia
+        var month = dataSplit[1]; // Armazernar mês
+        var year = dataSplit[2]; // Armazernar Ano
+
+        // Agora podemos inicializar o objeto Date, lembrando que o mês começa em 0, então fazemos -1.
+        var data1 = new Date(year, month - 1, day);
+
+
+        dataSplit = inicio.value.split('/');
+
+        day = dataSplit[0]; // 30
+        month = dataSplit[1]; // 03
+        year = dataSplit[2]; // 2019
+
+        var data2 = new Date(year, month - 1, day);
+
+        //Obter o resultado da subtração em millisegundos
+        var diff = Math.abs(data1.getTime() - data2.getTime());
+
+        //Para converter o resultado obtido em dias, deve-se obter o produto por 1000(segundos), 60(minutos), 60(horas) e 24(dias)
+        var days = diff / (1000 * 60 * 60 * 24);
+
+        //Soma-se o valor do (seguro * Preço do dia) + o preço do seguro
+        var TotalGeral = Math.round((total + parcial) * 100) / 100;
+        //Soma-se o total geral vezes a quantidade de dias dos quais o veículo foi requisitado
+        TotalGeral = Math.round((TotalGeral * days) * 100) / 100;
+
+        if (data1.getTime() < data2.getTime()) {
+            alert("A data prevista deve ser maior que a data de hoje");
+            document.getElementById('DatePrevista').focus();
+            TotalGeral = 0;
+        } else if (data1.getTime() == data2.getTime()) {
+            TotalGeral = Math.round((total + parcial) * 100) / 100;
+        }
+
+        itens.Produtos.push({
+            "AluguelVeiculoId": Veiculo_Id.value,
+            "Total": TotalGeral,
+            "AluguelSeguroId": Seguro_Id.value
+        });
+
+        ListaProdutosJSON.innerHTML = JSON.stringify(itens.Produtos);
+
+        var produto = "<tr>" +
+            "<td>" + Veiculo_Id.value + "</td>" +
+            "<td>" + TotalGeral + "</td>" +
+            "</tr> ";
+
+
+        ListaProdutos.innerHTML = produto;
+
+
+        TotalVenda.innerHTML = TotalGeral;
+        txtTotal.value = TotalGeral.toString().replace(".", ",");
+
+    }
+</script>
+

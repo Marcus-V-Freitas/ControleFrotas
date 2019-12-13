@@ -1,0 +1,82 @@
+﻿
+@{
+    ViewData["Title"] = "Painel";
+}
+<br />
+<br />
+<h1>Painel de Controle</h1>
+<br /><br />
+<h3>Gerais</h3>
+<div class="row">
+    <div class="col-md-3">
+        <div class="card">
+            <h5 class="card-header">Clientes</h5>
+            <div class="card-body text-center">
+                <p style="font-size: 48px">@ViewBag.Clientes</p>
+                <a asp-controller="Cliente" asp-action="Index" class="btn btn-primary">Visualizar</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card">
+            <h5 class="card-header">Newsletter</h5>
+            <div class="card-body text-center">
+                <p style="font-size: 48px">@ViewBag.Newsletter</p>
+                <a asp-action="GerarCSVNewsletter" target="_blank" class="btn btn-primary">Gerar arquivo</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card">
+            <h5 class="card-header">Veículos da Empresa</h5>
+            <div class="card-body text-center">
+                <p style="font-size: 48px">@ViewBag.VeiculosEmpresa</p>
+                <a asp-controller="VeiculoEmpresa" asp-action="Index" class="btn btn-primary">Gerenciar</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card">
+            <h5 class="card-header">Fornecedores de Seguros</h5>
+            <div class="card-body text-center">
+                <p style="font-size: 48px">@ViewBag.Fornecedores</p>
+                <a asp-controller="Fornecedor" asp-action="Index" class="btn btn-primary">Gerenciar</a>
+            </div>
+
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<h3>Aluguéis</h3>
+<div class="row">
+    <div class="col-md-3">
+        <div class="card">
+            <h5 class="card-header">NÚMERO DE ALUGUEIS REALIZADOS</h5>
+            <div class="card-body text-center">
+                <p style="font-size: 48px"> @ViewBag.NumeroAlugueis</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card">
+            <h5 class="card-header">TOTAL DE GANHOS</h5>
+            <div class="card-body">
+                <p style="font-size: 48px">@ViewBag.ValorTotalAlugueis.ToString("C")</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card">
+            <h5 class="card-header">FORMAS DE PAGAMENTO</h5>
+            <div class="card-body">
+                <h5 class="card-title">
+                    <strong>Boleto: </strong>@ViewBag.QuantidadeBoletoBancario
+                    <br />
+                    <strong>Cartão de Crédito:</strong> @ViewBag.QuantidadeCartaoCredito
+                </h5>
+            </div>
+        </div>
+    </div>
+</div>
+

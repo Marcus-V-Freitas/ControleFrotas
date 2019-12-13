@@ -1,0 +1,50 @@
+﻿@model ControleFrotasDLL.BLL.VeiculoCliente
+@{
+    ViewData["Title"] = "Cadastrar";
+}
+<br />
+<br />
+<form method="post">
+    <div class="form-group">
+        <label asp-for="Veiculo.Placa"></label>
+        <input asp-for="Veiculo.Placa" class="form-control placa" placeholder="Digite a placa">
+        <span asp-validation-for="Veiculo.Placa" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Veiculo.Renavam"></label>
+        <input asp-for="Veiculo.Renavam" class="form-control renavam" placeholder="Digite a placa">
+        <span asp-validation-for="Veiculo.Renavam" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Veiculo.Link_Foto"></label>
+        <input asp-for="Veiculo.Link_Foto" class="form-control" placeholder="Digite o link da foto">
+        <span asp-validation-for="Veiculo.Link_Foto" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Veiculo.ModeloId"></label>
+        <select asp-for="Veiculo.ModeloId" class="form-control" asp-items="@ViewBag.Modelos">
+            <option value="">Selecione</option>
+        </select>
+        <span asp-validation-for="Veiculo.ModeloId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Veiculo.CategoriaVeiculoId"></label>
+        <select asp-for="Veiculo.CategoriaVeiculoId" class="form-control" asp-items="@ViewBag.Categorias">
+            <option value="">Selecione</option>
+        </select>
+        <span asp-validation-for="Veiculo.CategoriaVeiculoId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ClienteId"></label>
+        <select asp-for="ClienteId" class="form-control" asp-items="@ViewBag.Cliente">
+            <option value="">Selecione</option>
+        </select>
+        <span asp-validation-for="ClienteId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Descricao"></label>
+        <input asp-for="Descricao" class="form-control" placeholder="Digite a descrição">
+        <span asp-validation-for="Descricao" class="text-danger"></span>
+    </div>
+    <button type="submit" id="send" class="btn btn-primary">Salvar</button> <a asp-action="Index" class="btn btn-info">Voltar</a>
+</form>

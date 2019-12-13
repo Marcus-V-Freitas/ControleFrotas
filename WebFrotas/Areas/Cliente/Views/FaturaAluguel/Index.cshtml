@@ -1,0 +1,65 @@
+﻿@model X.PagedList.IPagedList<ControleFrotasDLL.BLL.FaturaAluguel>
+@{
+    ViewData["Title"] = "Faturas";
+}
+@using X.PagedList;
+@using X.PagedList.Mvc.Core;
+
+<br />
+<br />
+<h2>Faturas de aluguel Pagas</h2>
+
+@if (TempData["MSG_S"] != null)
+{
+    <p class="alert alert-success">@TempData["MSG_S"]</p>
+}
+
+@if (Model.Count > 0)
+{
+
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">@Html.DisplayNameFor(model => model.First().AluguelId)</th>
+                    <th scope="col">@Html.DisplayNameFor(model => model.First().DataInicio)</th>
+                    <th scope="col">@Html.DisplayNameFor(model => model.First().DataRetorno)</th>
+                    <th scope="col">@Html.DisplayNameFor(model => model.First().ValorTotal)</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (ControleFrotasDLL.BLL.FaturaAluguel aluguel in Model)
+                {
+
+                    <tr>
+                        <th scope="row">@aluguel.AluguelId</th>
+                        @{
+
+
+                            DateTime.TryParseExact(aluguel.DataInicio, "yyyy/MM/dd", System.Globalization.CultureInfo.InvariantCulture,
+                                                                System.Globalization.DateTimeStyles.None, out var dataInicio);
+
+                            DateTime.TryParseExact(aluguel.DataRetorno, "yyyy/MM/dd", System.Globalization.CultureInfo.InvariantCulture,
+                                                                System.Globalization.DateTimeStyles.None, out var dataRetorno);
+
+
+                        }
+                        <th scope="row">@dataInicio.ToString("dd/MM/yyyy")</th>
+                        <th scope="row">@dataRetorno.ToString("dd/MM/yyyy")</th>
+                        <th scope="row">@aluguel.ValorTotal</th>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+
+    @Html.PagedListPager((IPagedList)Model, pagina => Url.Action("Index", new { pagina }))
+}
+else
+{
+    <span>Nenhum Registro Cadastrado!</span>
+}
+

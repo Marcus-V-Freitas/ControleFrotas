@@ -1,0 +1,44 @@
+﻿@model ControleFrotasDLL.BLL.RegistroUso
+@{
+    ViewData["Title"] = "Devolver";
+}
+<br />
+<br />
+<form id="frm" method="post">
+
+    <input type="hidden" asp-for="Id" />
+
+    <div class="form-group">
+        <label asp-for="RegistroVeiculoClienteId"></label>
+        <input asp-for="RegistroVeiculoClienteId" type="text" readonly="readonly" class="form-control">
+        <span asp-validation-for="RegistroVeiculoClienteId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Inicio"></label>
+        <input asp-for="Inicio" type="text" readonly="readonly" class="form-control">
+        <span asp-validation-for="Inicio" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Prevista"></label>
+        <input asp-for="Prevista" type="text" readonly="readonly" class="form-control">
+        <span asp-validation-for="Prevista" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Retorno"></label>
+        <input asp-for="Retorno" type="date" class="form-control">
+        <span asp-validation-for="Retorno" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Rota"></label>
+        <input asp-for="Rota" class="form-control">
+        <span asp-validation-for="Rota" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="RegistroUsoMotoristaId"></label>
+        <select asp-for="RegistroUsoMotoristaId" readonly="readonly" class="form-control" asp-items="@ViewBag.Motoristas">
+            <option value="">Selecione</option>
+        </select>
+        <span asp-validation-for="RegistroUsoMotoristaId" class="text-danger"></span>
+    </div>
+    <button type="submit" id="send" class="btn btn-primary">Salvar</button> <a asp-action="Index" class="btn btn-info">Voltar</a>
+</form>

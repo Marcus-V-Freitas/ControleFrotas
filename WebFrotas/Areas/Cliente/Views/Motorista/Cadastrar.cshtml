@@ -1,0 +1,120 @@
+﻿@model ControleFrotasDLL.BLL.Motorista
+
+@{
+    ViewData["Title"] = "Cadastrar";
+}
+<br />
+<br />
+<form id="frm" method="post">
+    <input type="hidden" asp-for="Cliente.Tipo" value="M" />
+
+    <div class="form-group">
+        <label asp-for="Cliente.Nome"></label>
+        <input asp-for="Cliente.Nome" class="form-control " placeholder="Digite o nome">
+        <span asp-validation-for="Cliente.Nome" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Cliente.Nascimento"></label>
+        <input asp-for="Cliente.Nascimento" class="form-control data" placeholder="Digite o CPF">
+        <span asp-validation-for="Cliente.Nascimento" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Cliente.CPFCNPJ"></label>
+        <input asp-for="Cliente.CPFCNPJ" id="CPFCNPJ" class="form-control" placeholder="Digite o CPF">
+        <span asp-validation-for="Cliente.CPFCNPJ" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Cliente.Email"></label>
+        <input asp-for="Cliente.Email" class="form-control" placeholder="Digite o email">
+        <span asp-validation-for="Cliente.Email" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="CNH"></label>
+        <input asp-for="CNH" class="form-control cnh" placeholder="Digite a CNH">
+        <span asp-validation-for="CNH" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="RG"></label>
+        <input asp-for="RG" class="form-control" placeholder="Digite o RG">
+        <span asp-validation-for="RG" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Renach"></label>
+        <input asp-for="Renach" class="form-control renach" placeholder="Digite o Renach">
+        <span asp-validation-for="Renach" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" asp-for="Sexo" value="M">
+            <span class="form-check-label"> Masculino </span>
+        </label>
+        <label class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" asp-for="Sexo" value="F">
+            <span class="form-check-label"> Feminino</span>
+        </label>
+        <br />
+        <span asp-validation-for="Sexo" class="text-danger"></span>
+    </div> <!-- form-group end.// -->
+    <div class="form-group">
+        <label asp-for="EmpresaId"></label>
+        <select asp-for="EmpresaId" class="form-control" asp-items="@ViewBag.Cliente">
+            <option value="">Selecione</option>
+        </select>
+        <span asp-validation-for="EmpresaId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label>CEP</label>
+        <input type="text" asp-for="Cliente.CEP" id="CEP" class="form-control cep" placeholder="">
+        <span asp-validation-for="Cliente.CEP" class="text-danger"></span>
+        <div class="alert alert-danger" style="display:none;"></div>
+    </div> <!-- form-group end.// -->
+    <div class="form-group">
+        <label>Estado</label>
+        <input type="text" asp-for="Cliente.Estado" id="Estado" readonly="readonly" class="form-control" placeholder="">
+        <span asp-validation-for="Cliente.Estado" class="text-danger"></span>
+    </div> <!-- form-group end.// -->
+    <div class="form-group">
+        <label>Cidade</label>
+        <input type="text" asp-for="Cliente.Cidade" id="Cidade" readonly="readonly" class="form-control" placeholder="">
+        <span asp-validation-for="Cliente.Cidade" class="text-danger"></span>
+    </div> <!-- form-group end.// -->
+    <div class="form-group">
+        <label>Bairro</label>
+        <input type="text" asp-for="Cliente.Bairro" id="Bairro" readonly="readonly" class="form-control" placeholder="">
+        <span asp-validation-for="Cliente.Bairro" class="text-danger"></span>
+    </div> <!-- form-group end.// -->
+    <div class="form-group">
+        <label>Endereço</label>
+        <input type="text" asp-for="Cliente.Endereco" id="Endereco" class="form-control" placeholder="">
+        <span asp-validation-for="Cliente.Endereco" class="text-danger"></span>
+    </div> <!-- form-group end.// -->
+    <div class="form-group">
+        <label>Complemento</label>
+        <input type="text" asp-for="Cliente.Complemento" id="Complemento" class="form-control" placeholder="">
+        <span asp-validation-for="Cliente.Complemento" class="text-danger"></span>
+    </div> <!-- form-group end.// -->
+    <div class="form-group">
+        <label>Número</label>
+        <input type="text" asp-for="Cliente.Numero" class="form-control" placeholder="">
+        <span asp-validation-for="Cliente.Numero" class="text-danger"></span>
+    </div> <!-- form-group end.// -->
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label>Telefone</label>
+            <input type="text" asp-for="Cliente.Telefone" class="form-control telefone">
+            <span asp-validation-for="Cliente.Telefone" class="text-danger"></span>
+        </div> <!-- form-group end.// -->
+        <!-- form-group end.// -->
+    </div> <!-- form-row.// -->
+    <div class="form-group">
+        <label>Senha</label>
+        <input class="form-control" asp-for="Cliente.Senha" type="password">
+        <span asp-validation-for="Cliente.Senha" class="text-danger"></span>
+    </div> <!-- form-group end.// -->
+    <div class="form-group">
+        <label>Confirmar Senha</label>
+        <input class="form-control" asp-for="Cliente.ConfirmarSenha" type="password">
+        <span asp-validation-for="Cliente.ConfirmarSenha" class="text-danger"></span>
+    </div>
+    <button type="submit" id="send" class="btn btn-primary">Salvar</button> <a asp-action="Index" class="btn btn-info">Voltar</a>
+</form>

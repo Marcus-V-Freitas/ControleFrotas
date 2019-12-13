@@ -1,0 +1,102 @@
+﻿
+@{
+    ViewData["Title"] = "Painel";
+    var inicio = Context.Request.Query["inicio"];
+    var fim = Context.Request.Query["fim"];
+}
+
+<br />
+<br />
+<h1>Painel de Controle</h1>
+<br /><br />
+<h3>Gerais</h3>
+<div class="row">
+    <div class="col-md-3">
+        <div class="card">
+            <h5 class="card-header">Motoristas</h5>
+            <div class="card-body text-center">
+                <p style="font-size: 48px">@ViewBag.Motoristas</p>
+                <a asp-controller="Motorista" asp-action="Index" class="btn btn-primary">Visualizar</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card">
+            <h5 class="card-header">Cálculo das Despesas Por Período</h5>
+            <form method="get">
+                <div class="card-body text-center">
+                    <div class="form-row">
+                        <div class="col-sm-6">
+                            <label for="pesquisa">Data de Inicio:</label>
+                            <input type="date" name="inicio" id="inicio" value="@inicio" class="form-control">
+                        </div>
+
+                        <div class="col-sm-6">
+                            <label for="pesquisa">Data de Fim:</label>
+                            <input type="date" name="fim" id="fim" value="@fim" class="form-control">
+
+                        </div>
+                    </div>
+                    <br />
+                    <button type="submit" class="btn btn-primary">Calcular</button>
+
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card">
+            <h5 class="card-header">Valor das Despesas da Frota</h5>
+            <div class="card-body text-center">
+                <p style="font-size: 48px">@ViewBag.Despesas.ToString("C")</p>
+                <a asp-controller="RegistroDespesa" asp-action="Index" class="btn btn-primary">Gerenciar</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card">
+            <h5 class="card-header">Veículos do Cliente</h5>
+            <div class="card-body text-center">
+                <p style="font-size: 48px">@ViewBag.VeiculosCliente</p>
+                <a asp-controller="VeiculoCliente" asp-action="Index" class="btn btn-primary">Gerenciar</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+<br />
+<br />
+<h3>Aluguéis</h3>
+<div class="row">
+    <div class="col-md-3">
+        <div class="card">
+            <h5 class="card-header">NÚMERO DE ALUGUEIS REALIZADOS</h5>
+            <div class="card-body text-center">
+                <p style="font-size: 48px"> @ViewBag.NumeroAlugueis</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card">
+            <h5 class="card-header">TOTAL DE GASTO</h5>
+            <div class="card-body">
+                <p style="font-size: 48px">@ViewBag.ValorTotalAlugueis.ToString("C")</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card">
+            <h5 class="card-header">FORMAS DE PAGAMENTO</h5>
+            <div class="card-body">
+                <h5 class="card-title">
+                    <strong>Boleto: </strong>@ViewBag.QuantidadeBoletoBancario
+                    <br />
+                    <strong>Cartão de Crédito:</strong> @ViewBag.QuantidadeCartaoCredito
+                </h5>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
